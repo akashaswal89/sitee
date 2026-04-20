@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weblyft — Web Development Agency India</title>
+  <meta name="description" content="Weblyft builds dynamic websites, landing pages, portfolio sites, CRM panels and fixes bugs. Pan India online service.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #070710;
+      --bg2: #0d0d1a;
+      --card: #12121f;
+      --card2: #1a1a2e;
+      --accent: #00d4ff;
+      --accent2: #7c3aed;
+      --accent3: #06ffa5;
+      --text: #eeeef5;
+      --muted: #7878a0;
+      --border: rgba(0,212,255,0.12);
+      --glow: rgba(0,212,255,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.15; }
+
+    /* GRID NOISE BG */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7,7,16,0.9);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.55rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent), #0088cc);
+      color: #000 !important;
+      font-weight: 700 !important;
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: 0.85rem !important;
+      transition: opacity 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(7,7,16,0.98);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 6% 28px;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: flex; }
+
+    .nav-mobile a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 6% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .blob1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,212,255,0.12), transparent 70%);
+      top: -100px; right: -100px;
+    }
+
+    .blob2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 70%);
+      bottom: 0; left: -50px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.25);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .live-dot {
+      width: 6px; height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .cyan { color: var(--accent); }
+    .hero h1 .purple { color: #a78bfa; }
+
+    .hero-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 460px;
+      margin-bottom: 32px;
+      line-height: 1.75;
+    }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-main {
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(0,212,255,0.25);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(0,212,255,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: rgba(0,212,255,0.05);
+    }
+
+    /* Hero right — floating cards */
+    .hero-right { position: relative; }
+
+    .float-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      transition: transform 0.3s;
+      animation: slideIn 0.5s ease both;
+    }
+
+    .float-card:nth-child(2) { margin-left: 20px; animation-delay: 0.15s; }
+    .float-card:nth-child(3) { margin-left: 8px; animation-delay: 0.3s; }
+    .float-card:nth-child(4) { margin-left: 28px; animation-delay: 0.45s; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .float-card:hover { transform: translateX(-5px); }
+
+    .card-ico {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .ico-cyan { background: rgba(0,212,255,0.15); color: var(--accent); }
+    .ico-purple { background: rgba(124,58,237,0.2); color: #a78bfa; }
+    .ico-green { background: rgba(6,255,165,0.15); color: var(--accent3); }
+    .ico-orange { background: rgba(255,150,50,0.15); color: #ffa040; }
+
+    .card-info .ctitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .card-info .csub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 90px 6%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .s-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+
+    .s-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      line-height: 1.75;
+    }
+
+    .s-head { text-align: center; margin-bottom: 55px; }
+    .s-head .s-sub { margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .svc-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .svc-card:hover::before { opacity: 1; }
+    .svc-card:hover {
+      border-color: rgba(0,212,255,0.2);
+      transform: translateY(-5px);
+      background: var(--card2);
+    }
+
+    .svc-ico {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      background: rgba(0,212,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .svc-card:hover .svc-ico {
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+    }
+
+    .svc-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .svc-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .svc-price {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--accent3);
+      font-weight: 600;
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-section { background: var(--bg2); }
+
+    .portfolio-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .port-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .port-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border);
+    }
+
+    .port-thumb {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pt1 { background: linear-gradient(135deg, #1a1a3e, #0d1f3e); }
+    .pt2 { background: linear-gradient(135deg, #1a0d2e, #2e1a0d); }
+    .pt3 { background: linear-gradient(135deg, #0d2e1a, #0d1f3e); }
+    .pt4 { background: linear-gradient(135deg, #2e1a0d, #1a1a3e); }
+    .pt5 { background: linear-gradient(135deg, #0d2e2e, #1a0d2e); }
+    .pt6 { background: linear-gradient(135deg, #1a2e0d, #0d2e1a); }
+
+    .port-tag {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(0,0,0,0.6);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .port-body { padding: 18px 20px; }
+
+    .port-body h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .port-body p { color: var(--muted); font-size: 0.82rem; }
+
+    /* ── STATS ── */
+    .stats-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .stat-b {
+      background: var(--card);
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .stat-b .big {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--accent);
+    }
+
+    .stat-b .sm {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    /* ── PROCESS ── */
+    .process-section { background: var(--bg2); }
+
+    .process-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      position: relative;
+    }
+
+    .process-step {
+      background: var(--card);
+      padding: 32px 24px;
+      position: relative;
+      border-radius: 0;
+    }
+
+    .process-grid .process-step:first-child { border-radius: 16px 0 0 16px; }
+    .process-grid .process-step:last-child { border-radius: 0 16px 16px 0; }
+
+    .step-n {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(0,212,255,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .process-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .process-step p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      background: var(--card2);
+    }
+
+    .price-card:hover { transform: translateY(-4px); }
+
+    .featured-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .price-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .price-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .price-num span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+
+    .price-desc { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+
+    .price-features { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+
+    .price-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; color: var(--muted);
+    }
+
+    .price-features li i { color: var(--accent3); font-size: 0.8rem; }
+
+    /* ── TESTIMONIALS ── */
+    .test-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .test-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 26px;
+    }
+
+    .test-stars { color: #fbbf24; font-size: 0.8rem; margin-bottom: 12px; }
+
+    .test-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .test-author { display: flex; align-items: center; gap: 12px; }
+
+    .ava {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800; font-size: 0.85rem;
+      color: #fff; flex-shrink: 0;
+    }
+
+    .ava1 { background: linear-gradient(135deg, #00d4ff, #0088cc); color: #000; }
+    .ava2 { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+    .ava3 { background: linear-gradient(135deg, #06ffa5, #00cc7e); color: #000; }
+
+    .ava-info strong { display: block; font-size: 0.88rem; font-weight: 700; }
+    .ava-info span { font-size: 0.77rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(124,58,237,0.07) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg.full { grid-column: 1/-1; }
+
+    .fg label { font-size: 0.8rem; color: var(--muted); font-weight: 600; letter-spacing: 0.3px; }
+
+    .fg input, .fg textarea, .fg select {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 13px 15px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .fg input:focus, .fg textarea:focus, .fg select:focus {
+      border-color: var(--accent);
+    }
+
+    .fg select option { background: var(--card); }
+    .fg textarea { height: 120px; }
+
+    .form-submit { text-align: center; margin-top: 18px; }
+
+    .success-box {
+      display: none;
+      margin-top: 16px;
+      background: rgba(6,255,165,0.08);
+      border: 1px solid rgba(6,255,165,0.25);
+      color: var(--accent3);
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 55px 6% 28px;
+    }
+
+    .ft-inner { max-width: 1200px; margin: 0 auto; }
+
+    .ft-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 44px;
+    }
+
+    .ft-brand p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 12px;
+      max-width: 240px;
+      line-height: 1.75;
+    }
+
+    .ft-socials { display: flex; gap: 9px; margin-top: 18px; }
+
+    .soc {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .soc:hover { background: var(--accent); color: #000; }
+
+    .ft-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+
+    .ft-col ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .ft-col ul a:hover { color: var(--text); }
+
+    .ft-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ft-bottom p { color: var(--muted); font-size: 0.8rem; }
+    .ft-bottom a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 0.8rem; transition: color 0.2s; }
+    .ft-bottom a:hover { color: var(--text); }
+
+    /* ── BACK TOP ── */
+    #btt {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #000;
+      text-decoration: none;
+      font-size: 1rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    }
+
+    #btt.show { opacity: 1; transform: translateY(0); }
+
+    /* ── WHATSAPP BTN ── */
+    .wa-btn {
+      position: fixed;
+      bottom: 80px; right: 28px;
+      width: 42px; height: 42px;
+      background: #25D366;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      transition: transform 0.2s;
+    }
+
+    .wa-btn:hover { transform: scale(1.08); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .stats-wrap { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-grid .process-step:first-child { border-radius: 16px 0 0 0; }
+      .process-grid .process-step:last-child { border-radius: 0 0 16px 16px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 450px; }
+      .test-grid { grid-template-columns: 1fr 1fr; }
+      .ft-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .stats-wrap { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      .process-grid .process-step:first-child { border-radius: 16px 16px 0 0; }
+      .process-grid .process-step:last-child { border-radius: 0 0 16px 16px; }
+      .test-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .ft-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+    Web<span>lyft</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-mobile" id="navMob">
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#portfolio" onclick="closeMob()">Portfolio</a>
+  <a href="#pricing" onclick="closeMob()">Pricing</a>
+  <a href="#contact" onclick="closeMob()">Free Consultation →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="live-dot"></span> Pan India Web Services — Online</div>
+      <h1>Aapka Business,<br><span class="cyan">Hamare Websites.</span><br><span class="purple">Guaranteed.</span></h1>
+      <p class="hero-desc">Dynamic websites, landing pages, portfolio sites, CRM panels, bug fixing — sab kuch ek jagah. Fast delivery. Affordable prices. 100% satisfaction.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-main">Free Project Quote →</a>
+        <a href="#portfolio" class="btn-outline">View Our Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="float-card">
+        <div class="card-ico ico-cyan"><i class="fas fa-globe"></i></div>
+        <div class="card-info">
+          <div class="ctitle">Dynamic Website</div>
+          <div class="csub">Full-stack custom development</div>
+        </div>
+      </div>
+      <div class="float-card">
+        <div class="card-ico ico-purple"><i class="fas fa-tachometer-alt"></i></div>
+        <div class="card-info">
+          <div class="ctitle">CRM & Admin Panel</div>
+          <div class="csub">Complete business management</div>
+        </div>
+      </div>
+      <div class="float-card">
+        <div class="card-ico ico-green"><i class="fas fa-bug"></i></div>
+        <div class="card-info">
+          <div class="ctitle">Bug Fix & Support</div>
+          <div class="csub">Fast turnaround, reliable fixes</div>
+        </div>
+      </div>
+      <div class="float-card">
+        <div class="card-ico ico-orange"><i class="fas fa-rocket"></i></div>
+        <div class="card-info">
+          <div class="ctitle">Landing Pages</div>
+          <div class="csub">High-converting designs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding: 0 6% 70px;">
+  <div class="stats-wrap">
+    <div class="stat-b"><div class="big">150+</div><div class="sm">Projects Delivered</div></div>
+    <div class="stat-b"><div class="big">98%</div><div class="sm">Client Satisfaction</div></div>
+    <div class="stat-b"><div class="big">48hr</div><div class="sm">Avg Delivery Time</div></div>
+    <div class="stat-b"><div class="big">5★</div><div class="sm">Average Rating</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="s-head">
+    <span class="s-tag">Our Services</span>
+    <h2 class="s-title">Kya Kya Karte Hain Hum?</h2>
+    <p class="s-sub">Web se related koi bhi kaam — hum karte hain. Quickly, professionally, aur affordable rates par.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-layer-group"></i></div>
+      <h3>Dynamic Website</h3>
+      <p>Puri tarah se custom dynamic website — database-driven, admin panel ke saath. E-commerce, business ya koi bhi use case.</p>
+      <div class="svc-price">Starting ₹5,000</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-rocket"></i></div>
+      <h3>Landing Page</h3>
+      <p>High-converting single-page websites jo visitors ko customers mein badal de. Lead generation, product launch, offers.</p>
+      <div class="svc-price">Starting ₹1,500</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-briefcase"></i></div>
+      <h3>Portfolio Website</h3>
+      <p>Aapka professional online presence. Freelancers, photographers, doctors, lawyers — sabke liye clean portfolio sites.</p>
+      <div class="svc-price">Starting ₹2,000</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-tachometer-alt"></i></div>
+      <h3>CRM & Admin Panel</h3>
+      <p>Apne business ko streamline karo custom CRM se. Customer management, orders, reports — ek hi jagah sab kuch.</p>
+      <div class="svc-price">Starting ₹8,000</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-bug"></i></div>
+      <h3>Bug Fix & Website Repair</h3>
+      <p>Website crash, broken layout, slow speed, form issues — koi bhi problem ho, hum fast fix karte hain. 24-48 hr turnaround.</p>
+      <div class="svc-price">Starting ₹500</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ico"><i class="fas fa-magic"></i></div>
+      <h3>Custom Demand Website</h3>
+      <p>Aapki specific requirements ke hisaab se poori website banate hain. Aap batao — hum deliver karte hain.</p>
+      <div class="svc-price">Quote on Request</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="s-head">
+    <span class="s-tag">Our Work</span>
+    <h2 class="s-title">Recent Projects</h2>
+    <p class="s-sub">Kuch aise projects jo humne clients ke liye deliver kiye hain.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="port-card">
+      <div class="port-thumb pt1">🛒<span class="port-tag">E-COMMERCE</span></div>
+      <div class="port-body">
+        <h3>FashionCart — Online Store</h3>
+        <p>Full dynamic e-commerce site with cart, payment integration & admin panel.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb pt2">📊<span class="port-tag">CRM PANEL</span></div>
+      <div class="port-body">
+        <h3>LeadPro — CRM Dashboard</h3>
+        <p>Custom CRM for lead management, follow-ups, and team reporting.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb pt3">🎯<span class="port-tag">LANDING PAGE</span></div>
+      <div class="port-body">
+        <h3>EduLaunch — Course Landing</h3>
+        <p>High-converting landing page for online course launch with form integration.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb pt4">👨‍💼<span class="port-tag">PORTFOLIO</span></div>
+      <div class="port-body">
+        <h3>Dr. Arjun Mehta — Medical Portfolio</h3>
+        <p>Professional portfolio for a doctor with appointment booking system.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb pt5">🏢<span class="port-tag">BUSINESS</span></div>
+      <div class="port-body">
+        <h3>TechNova Solutions Website</h3>
+        <p>Corporate business website with services, team, and contact management.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb pt6">🍕<span class="port-tag">RESTAURANT</span></div>
+      <div class="port-body">
+        <h3>TastyBite — Restaurant Site</h3>
+        <p>Restaurant website with dynamic menu, online ordering & admin panel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="s-head">
+    <span class="s-tag">How We Work</span>
+    <h2 class="s-title">Simple 4-Step Process</h2>
+    <p class="s-sub">Baat karo aur project ready — itna simple hai humara process.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-n">01</div>
+      <h3>Requirement Discussion</h3>
+      <p>WhatsApp ya call par baat karo. Aap apni exact requirements batao — kya chahiye, kaisa chahiye.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">02</div>
+      <h3>Quote & Timeline</h3>
+      <p>Hum 2 ghante mein quote bhejte hain with exact price and delivery date. No hidden charges.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">03</div>
+      <h3>Design & Development</h3>
+      <p>Aapki approval ke baad kaam shuru — regular updates milti hain progress ki WhatsApp par.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-n">04</div>
+      <h3>Delivery & Support</h3>
+      <p>Project deliver, free revisions, aur 30 din ka free support. Aap satisfied toh hum satisfied.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="s-head">
+    <span class="s-tag">Pricing Plans</span>
+    <h2 class="s-title">Simple & Transparent Pricing</h2>
+    <p class="s-sub">Koi hidden charges nahi. Jo price bola, wahi final.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>Starter</h3>
+      <div class="price-num">₹1,999 <span>/ project</span></div>
+      <p class="price-desc">Landing pages & basic portfolio sites. Perfect for freelancers & individuals.</p>
+      <ul class="price-features">
+        <li><i class="fas fa-check-circle"></i> 1-3 Page Website</li>
+        <li><i class="fas fa-check-circle"></i> Mobile Responsive</li>
+        <li><i class="fas fa-check-circle"></i> Contact Form</li>
+        <li><i class="fas fa-check-circle"></i> 3 Day Delivery</li>
+        <li><i class="fas fa-check-circle"></i> 2 Free Revisions</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="display:block; text-align:center; font-size:0.9rem; padding:12px;">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <div class="featured-badge">MOST POPULAR</div>
+      <h3>Business</h3>
+      <div class="price-num">₹5,999 <span>/ project</span></div>
+      <p class="price-desc">Full dynamic website with admin panel. Best for small businesses & startups.</p>
+      <ul class="price-features">
+        <li><i class="fas fa-check-circle"></i> 5-10 Page Dynamic Site</li>
+        <li><i class="fas fa-check-circle"></i> Admin Panel Included</li>
+        <li><i class="fas fa-check-circle"></i> Database Integration</li>
+        <li><i class="fas fa-check-circle"></i> 7 Day Delivery</li>
+        <li><i class="fas fa-check-circle"></i> 5 Free Revisions</li>
+        <li><i class="fas fa-check-circle"></i> 30 Day Support</li>
+      </ul>
+      <a href="#contact" class="btn-main" style="display:block; text-align:center; font-size:0.9rem; padding:12px;">Get Started</a>
+    </div>
+    <div class="price-card">
+      <h3>Enterprise</h3>
+      <div class="price-num">₹15,000+ <span>/ project</span></div>
+      <p class="price-desc">CRM, large portals, custom platforms. For growing businesses with complex needs.</p>
+      <ul class="price-features">
+        <li><i class="fas fa-check-circle"></i> Full Custom Development</li>
+        <li><i class="fas fa-check-circle"></i> CRM / ERP Panel</li>
+        <li><i class="fas fa-check-circle"></i> API Integration</li>
+        <li><i class="fas fa-check-circle"></i> Timeline as per scope</li>
+        <li><i class="fas fa-check-circle"></i> Unlimited Revisions</li>
+        <li><i class="fas fa-check-circle"></i> 60 Day Support</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="display:block; text-align:center; font-size:0.9rem; padding:12px;">Get Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background: var(--bg2);">
+  <div class="s-head">
+    <span class="s-tag">Client Reviews</span>
+    <h2 class="s-title">Clients Kya Kehte Hain</h2>
+    <p class="s-sub">Real clients, real reviews.</p>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p>"Meri e-commerce website exactly waisi bani jaise maine socha tha. Price bahut affordable tha aur delivery time pe hui. Highly recommend!"</p>
+      <div class="test-author">
+        <div class="ava ava1">SK</div>
+        <div class="ava-info"><strong>Sunita Kapoor</strong><span>Clothing Business, Jaipur</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p>"Website mein ek critical bug tha jo 2 din se koi fix nahi kar pa raha tha. Weblyft ne 4 ghante mein fix kar diya. Amazing service!"</p>
+      <div class="test-author">
+        <div class="ava ava2">RV</div>
+        <div class="ava-info"><strong>Rohit Verma</strong><span>Tech Startup, Pune</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p>"CRM panel ne humara poora business manage karna easy kar diya. Team bahut professional hai aur har step pe update dete hain."</p>
+      <div class="test-author">
+        <div class="ava ava3">AM</div>
+        <div class="ava-info"><strong>Aarav Mehta</strong><span>Real Estate Agency, Delhi</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <span class="s-tag">Ready to Start?</span>
+  <h2>Apna Project Shuru Karo Aaj</h2>
+  <p>Free consultation lo — bata aapki requirements, pao instant quote.</p>
+  <a href="#contact" class="btn-main">WhatsApp Par Baat Karo →</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="s-head">
+    <span class="s-tag">Contact Us</span>
+    <h2 class="s-title">Project Shuru Karte Hain?</h2>
+    <p class="s-sub">Form bharo ya directly WhatsApp karo. Hum 1 ghante mein reply karte hain.</p>
+  </div>
+  <div class="contact-inner">
+    <div class="form-row">
+      <div class="fg">
+        <label>Aapka Naam</label>
+        <input type="text" id="cname" placeholder="Rahul Sharma">
+      </div>
+      <div class="fg">
+        <label>Mobile / WhatsApp</label>
+        <input type="tel" id="cphone" placeholder="+91 98765 43210">
+      </div>
+      <div class="fg">
+        <label>Email Address</label>
+        <input type="email" id="cemail" placeholder="rahul@gmail.com">
+      </div>
+      <div class="fg">
+        <label>Budget Range</label>
+        <select id="cbudget">
+          <option value="">Select budget...</option>
+          <option>Under ₹2,000</option>
+          <option>₹2,000 – ₹5,000</option>
+          <option>₹5,000 – ₹15,000</option>
+          <option>₹15,000+</option>
+        </select>
+      </div>
+      <div class="fg full">
+        <label>Service Chahiye</label>
+        <select id="cservice">
+          <option value="">Select service...</option>
+          <option>Dynamic Website</option>
+          <option>Landing Page</option>
+          <option>Portfolio Website</option>
+          <option>CRM / Admin Panel</option>
+          <option>Bug Fix / Website Repair</option>
+          <option>Custom Requirement</option>
+        </select>
+      </div>
+      <div class="fg full">
+        <label>Project Details</label>
+        <textarea id="cmsg" placeholder="Apna project describe karo — kya chahiye, kab chahiye, koi special requirements..."></textarea>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn-main" onclick="sendForm()" style="padding:14px 40px; font-size:1rem;">Send Message →</button>
+    </div>
+    <div class="success-box" id="sbox">✅ Message bhej diya! Hum 1 ghante mein WhatsApp/Email par reply karenge.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#" class="logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div>Web<span>lyft</span></a>
+        <p>Pan India web development agency. Dynamic websites, CRM panels, landing pages, bug fixes — sab ek jagah.</p>
+        <div class="ft-socials">
+          <a href="#" class="soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="soc"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="soc"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="soc"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Dynamic Website</a></li>
+          <li><a href="#services">Landing Page</a></li>
+          <li><a href="#services">Portfolio Website</a></li>
+          <li><a href="#services">CRM Panel</a></li>
+          <li><a href="#services">Bug Fix</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#portfolio">Our Work</a></li>
+          <li><a href="#process">How We Work</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/919999999999"><i class="fab fa-whatsapp" style="margin-right:7px;color:#25D366"></i>WhatsApp Us</a></li>
+          <li><a href="mailto:hello@weblyft.in"><i class="fas fa-envelope" style="margin-right:7px;"></i>hello@weblyft.in</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right:7px;"></i>Pan India (Online)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© 2025 Weblyft. All rights reserved.</p>
+      <div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" id="btt"><i class="fas fa-arrow-up"></i></a>
+<a href="https://wa.me/919999999999" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+  // Hamburger
+  document.getElementById('ham').addEventListener('click', () =>
+    document.getElementById('navMob').classList.toggle('open'));
+  function closeMob() { document.getElementById('navMob').classList.remove('open'); }
+
+  // Back to top
+  window.addEventListener('scroll', () =>
+    document.getElementById('btt').classList.toggle('show', window.scrollY > 400));
+
+  // Form submit
+  function sendForm() {
+    const name = document.getElementById('cname').value.trim();
+    const phone = document.getElementById('cphone').value.trim();
+    if (!name || !phone) { alert('Naam aur phone number zaroor bharo!'); return; }
+    document.getElementById('sbox').style.display = 'block';
+    ['cname','cphone','cemail','cbudget','cservice','cmsg'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    setTimeout(() => document.getElementById('sbox').style.display = 'none', 6000);
+  }
+</script>
+</body>
+</html>
